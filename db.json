@@ -1,0 +1,18 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "title1",
+      "content": "content1",
+      "author-id": "1"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "yjchoi",
+      "email": "yjchoi@gmail.com",
+      "password": "abc1234"
+    }
+  ]
+}
