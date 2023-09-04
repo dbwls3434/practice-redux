@@ -43,7 +43,7 @@ const SignUp = () => {
 
     dispatch(createAdmin(newAdmin))
 
-    navigate('/')
+    navigate('/login')
   }
 
   return (

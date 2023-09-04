@@ -1,16 +1,14 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAdminList } from '../features/admins/adminSlice'
+import { getAdminList, setAdmin } from '../features/admins/adminSlice'
 
 const LogIn = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
 
   useEffect(() => {
     dispatch(getAdminList())
@@ -32,11 +30,12 @@ const LogIn = () => {
     }
 
     const loginAdmin = {
-      email,
-      password,
+      name: existAdmin.name,
+      email: existAdmin.email,
     }
 
     localStorage.setItem('loginAdmin', JSON.stringify(loginAdmin))
+    dispatch(setAdmin(loginAdmin))
 
     navigate('/')
   }

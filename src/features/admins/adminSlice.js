@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import adminService from './adminService'
 
 const initialState = {
+  admin: null,
   admins: [],
   isLoading: false,
   isError: false,
@@ -57,6 +58,7 @@ const adminSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => initialState,
+    setAdmin: (state, action) => ({ ...state, admin: action.payload }),
   },
   extraReducers(builder) {
     builder
@@ -123,6 +125,6 @@ const adminSlice = createSlice({
   },
 })
 
-export const { reset } = adminSlice.actions
+export const { reset, setAdmin } = adminSlice.actions
 
 export default adminSlice.reducer

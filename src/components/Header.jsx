@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { setAdmin } from '../features/admins/adminSlice'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -10,12 +11,15 @@ const Header = () => {
   const [loginAdmin, setLoginAdmin] = useState(null)
 
   useEffect(() => {
-    setLoginAdmin(JSON.parse(localStorage.getItem('loginAdmin')))
-  }, [dispatch, navigate])
+    const tmpAdmin = JSON.parse(localStorage.getItem('loginAdmin'))
+    setLoginAdmin(tmpAdmin)
+    dispatch(setAdmin(tmpAdmin))
+  }, [navigate])
 
   const onLogOut = () => {
     localStorage.removeItem('loginAdmin')
     setLoginAdmin(null)
+    dispatch(setAdmin(null))
     navigate('/')
   }
 
@@ -39,7 +43,7 @@ const Header = () => {
                 <Link to="admin">Admin</Link>
               </li>
               <li>
-                <button onClick={onLogOut}>LogOut</button>
+                <button onClick={onLogOut}>{loginAdmin.name} LogOut</button>
               </li>
             </>
           )}

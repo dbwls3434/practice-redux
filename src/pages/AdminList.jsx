@@ -5,9 +5,13 @@ import Spinner from '../components/Spinner'
 
 const AdminList = () => {
   const dispatch = useDispatch()
-  const { admins, isLoading, isSuccess, isError } = useSelector(
-    (state) => state.admin
-  )
+  const {
+    admin: loginAdmin,
+    admins,
+    isLoading,
+    isSuccess,
+    isError,
+  } = useSelector((state) => state.admin)
 
   useEffect(() => {
     if (!isLoading && !isSuccess) {
@@ -31,7 +35,9 @@ const AdminList = () => {
         <article key={admin.id}>
           <p className="postCredit">{admin.name}</p>
           <p className="postCredit">{admin.email}</p>
-          <button onClick={() => onDeleteAdmin(admin.id)}>Delete</button>
+          {admin.email === loginAdmin.email && (
+            <button onClick={() => onDeleteAdmin(admin.id)}>Delete</button>
+          )}
         </article>
       ))}
     </section>
