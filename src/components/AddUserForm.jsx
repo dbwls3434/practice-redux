@@ -1,11 +1,23 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { createUser } from '../features/users/userSlice'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createUser, updateUser } from '../features/users/userSlice'
 
 const AddUserForm = () => {
   const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.user)
 
+  const [id, setId] = useState('')
   const [name, setName] = useState('')
+
+  useEffect(() => {
+    if (user) {
+      setId(user.id)
+      setName(user.name)
+    } else {
+      setId('')
+      setName('')
+    }
+  }, [user, dispatch])
 
   const onCreateUser = () => {
     const newUser = {
@@ -13,6 +25,18 @@ const AddUserForm = () => {
     }
     dispatch(createUser(newUser))
 
+    setId('')
+    setName('')
+  }
+
+  const onUpdateUser = () => {
+    const existUser = {
+      id,
+      name,
+    }
+    dispatch(updateUser(existUser))
+
+    setId('')
     setName('')
   }
 
@@ -28,9 +52,16 @@ const AddUserForm = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <button type="button" onClick={onCreateUser}>
-          Save User
-        </button>
+        {!user && (
+          <button type="button" onClick={onCreateUser}>
+            Save User
+          </button>
+        )}
+        {user && (
+          <button type="button" onClick={onUpdateUser}>
+            Update User
+          </button>
+        )}
       </form>
     </section>
   )

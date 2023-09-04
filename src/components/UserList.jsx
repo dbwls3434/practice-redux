@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserList, deleteUser, reset } from '../features/users/userSlice'
+import {
+  getUserList,
+  deleteUser,
+  reset,
+  setUser,
+} from '../features/users/userSlice'
 import Spinner from '../components/Spinner'
 
 const UserList = () => {
@@ -13,10 +18,15 @@ const UserList = () => {
     if (!isLoading && !isSuccess) {
       dispatch(getUserList())
     }
+    reset()
   }, [isSuccess, isError, dispatch])
 
   const onDeleteUser = (id) => {
     dispatch(deleteUser(id))
+  }
+
+  const onBeforeUpdateUser = (user) => {
+    dispatch(setUser(user))
   }
 
   if (isLoading) {
@@ -30,7 +40,8 @@ const UserList = () => {
         <article key={user.id}>
           <p className="excerpt">{user.id}</p>
           <p className="postCredit">{user.name}</p>
-          <button onClick={() => onDeleteUser(user.id)}>delete</button>
+          <button onClick={() => onBeforeUpdateUser(user)}>Update</button>
+          <button onClick={() => onDeleteUser(user.id)}>Delete</button>
         </article>
       ))}
     </section>

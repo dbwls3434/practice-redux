@@ -12,6 +12,11 @@ const getUserList = async (user) => {
   return res.data
 }
 
+const updateUser = async (user) => {
+  const res = await axios.put(`${API_URL}/${user.id}`, user)
+  return res.data
+}
+
 const deleteUser = async (id) => {
   const res = await axios.delete(`${API_URL}/${id}`)
   return id
@@ -20,6 +25,7 @@ const deleteUser = async (id) => {
 const userService = {
   createUser,
   getUserList,
+  updateUser,
   deleteUser,
 }
 

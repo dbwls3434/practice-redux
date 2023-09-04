@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import userService from './userService'
 
 const initialState = {
+  user: null,
   users: [],
   isLoading: false,
   isError: false,
@@ -30,6 +31,17 @@ export const getUserList = createAsyncThunk(
   }
 )
 
+export const updateUser = createAsyncThunk(
+  'posts/update',
+  async (user, thunkAPI) => {
+    try {
+      return await userService.updateUser(user)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
+
 export const deleteUser = createAsyncThunk(
   'posts/delete',
   async (id, thunkAPI) => {
@@ -46,6 +58,9 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => initialState,
+    setUser: (state, action) => {
+      state.user = action.payload
+    },
   },
   extraReducers(builder) {
     builder
@@ -70,9 +85,26 @@ const userSlice = createSlice({
       .addCase(getUserList.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = false
-        state.users = [...action.payload]
+        state.users = [...action.payload].sort((a, b) => b.id - a.id)
       })
       .addCase(getUserList.rejected, (state) => {
+        state.isLoading = false
+        state.isSuccess = false
+        state.isError = true
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true
+        state.isSuccess = false
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.users = state.users.map((user) =>
+          user.id === action.payload.id ? action.payload : user
+        )
+        state.user = null
+      })
+      .addCase(updateUser.rejected, (state) => {
         state.isLoading = false
         state.isSuccess = false
         state.isError = true
@@ -94,6 +126,6 @@ const userSlice = createSlice({
   },
 })
 
-export const { reset } = userSlice.actions
+export const { reset, setUser } = userSlice.actions
 
 export default userSlice.reducer
