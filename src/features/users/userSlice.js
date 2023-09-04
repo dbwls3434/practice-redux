@@ -32,7 +32,7 @@ export const getUserList = createAsyncThunk(
 )
 
 export const updateUser = createAsyncThunk(
-  'posts/update',
+  'users/update',
   async (user, thunkAPI) => {
     try {
       return await userService.updateUser(user)
@@ -43,7 +43,7 @@ export const updateUser = createAsyncThunk(
 )
 
 export const deleteUser = createAsyncThunk(
-  'posts/delete',
+  'users/delete',
   async (id, thunkAPI) => {
     try {
       return await userService.deleteUser(id)

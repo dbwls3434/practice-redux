@@ -6,6 +6,9 @@ import User from './pages/User'
 import AddPostForm from './pages/AddPostForm'
 import SinglePost from './pages/SinglePost'
 import EditPostForm from './pages/EditPostForm'
+import AdminList from './pages/AdminList'
+import LogIn from './pages/LogIn'
+import SignUp from './pages/SignUp'
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
             <Route path="add" element={<AddPostForm />} />
           </Route>
           <Route path="user" element={<User />} />
+          <Route path="admin" element={<AdminList />} />
+          <Route path="login" element={<LogIn />} />
+          <Route path="signup" element={<SignUp />} />
         </Route>
       </Routes>
     </Router>

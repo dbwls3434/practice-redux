@@ -42,5 +42,25 @@
       "name": "user4",
       "id": 4
     }
+  ],
+  "admins": [
+    {
+      "name": "yjchoi",
+      "email": "yjchoi@gmail.com",
+      "password": "123456",
+      "id": 1
+    },
+    {
+      "name": "yymoon",
+      "email": "yymoon@gmail.com",
+      "password": "123456",
+      "id": 2
+    },
+    {
+      "name": "yjchoi1",
+      "email": "yjchoi1@gmail.com",
+      "password": "123456",
+      "id": 3
+    }
   ]
 }
