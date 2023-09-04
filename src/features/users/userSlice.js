@@ -10,7 +10,7 @@ const initialState = {
 }
 
 export const createUser = createAsyncThunk(
-  'posts/create',
+  'users/create',
   async (user, thunkAPI) => {
     try {
       return await userService.createUser(user)
@@ -21,7 +21,7 @@ export const createUser = createAsyncThunk(
 )
 
 export const getUserList = createAsyncThunk(
-  'posts/getList',
+  'users/getList',
   async (_, thunkAPI) => {
     try {
       return await userService.getUserList()

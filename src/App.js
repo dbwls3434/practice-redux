@@ -15,8 +15,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="post">
             <Route index element={<PostList />} />
-            <Route path=":id" element={<SinglePost />} />
-            <Route path=":id/edit" element={<EditPostForm />} />
+            <Route path=":postId" element={<SinglePost />} />
+            <Route path=":postId/edit" element={<EditPostForm />} />
             <Route path="add" element={<AddPostForm />} />
           </Route>
           <Route path="user" element={<User />} />

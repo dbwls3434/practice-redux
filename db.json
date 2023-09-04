@@ -1,28 +1,46 @@
 {
   "posts": [
     {
-      "id": 1,
       "title": "title1",
       "content": "content1",
-      "author-id": "1"
+      "author": "1",
+      "id": 1
+    },
+    {
+      "title": "title2",
+      "content": "content2",
+      "author": "2",
+      "id": 2
+    },
+    {
+      "title": "title3",
+      "content": "content3",
+      "author": "3",
+      "id": 3
+    },
+    {
+      "title": "title4",
+      "content": "content4",
+      "author": "",
+      "id": 4
     }
   ],
   "users": [
     {
-      "name": "user5",
+      "name": "user1",
+      "id": 1
+    },
+    {
+      "name": "user2",
       "id": 2
     },
     {
-      "id": 4,
-      "name": "user4444"
+      "name": "user3",
+      "id": 3
     },
     {
-      "name": "user5",
-      "id": 5
-    },
-    {
-      "name": "1111",
-      "id": 6
+      "name": "user4",
+      "id": 4
     }
   ]
 }
